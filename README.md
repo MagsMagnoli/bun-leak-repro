@@ -12,6 +12,8 @@ The application is a simple Express server that:
 
 ## Setup
 
+### Local Setup
+
 1. Ensure you have Bun installed:
 ```bash
 curl -fsSL https://bun.sh/install | bash
@@ -27,9 +29,25 @@ bun install
 bun run index.ts
 ```
 
+### Docker Setup (Different Bun Versions)
+
+To test the memory leak with different Bun versions:
+
+```bash
+# Run with Bun 1.2.7
+bun run start:1.2.7
+
+# Run with Bun 1.2.1
+bun run start:1.2.1
+```
+
+Each version will run on a different port:
+- Bun 1.2.7: http://localhost:3002
+- Bun 1.2.1: http://localhost:3003
+
 ## What to Observe
 
-1. The server will start at `http://localhost:3000`
+1. The server will start at the specified port
 2. Watch the memory usage in the console logs (every 5 seconds)
 3. Notice the gradual increase in memory usage over time
 4. Monitor the number of uploaded files in the `uploads` directory
@@ -51,8 +69,9 @@ The memory usage should gradually increase over time due to:
 ## Environment
 
 - OS: macOS 24.3.0
-- Runtime: Bun
+- Runtime: Bun (multiple versions for testing)
 - Dependencies: Express, Multer
+- Docker support included for version comparison
 
 ## Contributing
 
