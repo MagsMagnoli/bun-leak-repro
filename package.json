@@ -9,7 +9,9 @@
     "start:1.2.5": "docker build -t upload-server:1.2.5 -f Dockerfile.1.2.5 . && docker run --rm -p 3004:3000 upload-server:1.2.5",
     "start:1.2.1": "docker build -t upload-server:1.2.1 -f Dockerfile.1.2.1 . && docker run --rm -p 3003:3000 upload-server:1.2.1",
     "start:1.2.10": "docker build -t upload-server:1.2.10 -f Dockerfile.1.2.10 . && docker run --rm -p 3001:3000 upload-server:1.2.10",
-    "test:all": "concurrently \"bun run start:1.2.1\" \"bun run start:1.2.5\" \"bun run start:1.2.7\" \"bun run start:1.2.10\""
+    "test:all": "concurrently --kill-others-on-fail --handle-input \"bun run start:1.2.1\" \"bun run start:1.2.5\" \"bun run start:1.2.7\" \"bun run start:1.2.10\"",
+    "test": "bun run run-tests.ts",
+    "cleanup": "docker ps -q --filter ancestor=upload-server:1.2.1 | xargs -r docker stop && docker ps -q --filter ancestor=upload-server:1.2.5 | xargs -r docker stop && docker ps -q --filter ancestor=upload-server:1.2.7 | xargs -r docker stop && docker ps -q --filter ancestor=upload-server:1.2.10 | xargs -r docker stop"
   },
   "dependencies": {
     "express": "^4.18.2",
