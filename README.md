@@ -51,8 +51,12 @@ bun run start:1.2.5
 bun run start:1.2.1
 
 # Run all versions simultaneously for comparison
-bun run test:all
+bun run test
 ```
+
+Using `bun run test` will start all containers with proper signal handling - you can press Ctrl+C at any time to gracefully stop all containers. This is the recommended way to run the tests.
+
+Alternatively, you can use `bun run test:all` directly, but may need to manually clean up containers with `bun run cleanup` if terminated unexpectedly.
 
 Each version will run on a different port:
 - Bun 1.2.10: http://localhost:3001
