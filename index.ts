@@ -18,6 +18,7 @@ const upload = multer({
 // Create uploads directory if it doesn't exist
 import { mkdir, readFile, writeFile } from "fs/promises";
 await mkdir(join(__dirname, "uploads"), { recursive: true });
+await mkdir(join(__dirname, "storage"), { recursive: true });
 
 // Store previous heap stats to track allocation changes
 let prevHeapStats = heapStats();
